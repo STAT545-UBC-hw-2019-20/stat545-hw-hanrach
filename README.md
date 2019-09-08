@@ -9,6 +9,7 @@ There *isn't much* to navigate through now. Each assignment will be tagged with 
 I'm a graduate student at UBC Mathematics, Vancouver. 
 
 - I work on modelling [Lithim ion batteries](https://en.wikipedia.org/wiki/Lithium-ion_battery) :battery:
-- I like nature :tree:
-- I look forward to data wrangling :gear:
-![piggy](https://www.freepik.com/premium-vector/cute-piggy-cartoon-icon_4286937.htm)
+- I like nature :Evergreen Tree:
+
+- I look forward to data wrangling.
+![](https://media.giphy.com/media/lJNoBCvQYp7nq/giphy.gif)
