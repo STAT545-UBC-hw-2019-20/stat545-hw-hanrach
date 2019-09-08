@@ -9,7 +9,7 @@ There *isn't much* to navigate through now. Each assignment will be tagged with 
 I'm a graduate student at UBC Mathematics, Vancouver. 
 
 - I work on modelling [Lithim ion batteries](https://en.wikipedia.org/wiki/Lithium-ion_battery) :battery:
-- I like nature :Evergreen Tree:
+- I like nature :evergreen_tree: :sun_with_face: :hibiscus:
 
 - I look forward to data wrangling.
 
