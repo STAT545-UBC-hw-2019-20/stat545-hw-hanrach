@@ -4,7 +4,7 @@ This repository contains the homework assignments for __STAT545A__ -- a data exp
 
 ## Navigating through the repository
 File links to each homework:
-- [HW1](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-hanrach/tree/master/hw1)
+- [HW1](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-hanrach/tree/master/hw1)\
 Each assignment will be tagged with the corresponding number. 
 
 ### About Me
