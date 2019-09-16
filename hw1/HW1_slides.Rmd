@@ -3,9 +3,9 @@ title: '`mtcars` data exploration'
 author: "Rachel Han"
 date: "15/09/2019"
 output:
-  beamer_presentation: default
-  ioslides_presentation: null
   keep_md: yes
+  ioslides_presentation: null
+  beamer_presentation: default
   widescreen: yes
 ---
 ## `mtcars` as tibble

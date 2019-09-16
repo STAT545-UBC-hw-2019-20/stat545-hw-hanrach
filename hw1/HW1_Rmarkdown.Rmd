@@ -3,8 +3,6 @@ title: 'Homework 1: `mtcars` data exploration'
 author: "Rachel Han"
 date: "15/09/2019"
 output:
-  pdf_document:
-    toc: yes
   html_document:
     highlight: tango
     number_sections: no
@@ -12,6 +10,10 @@ output:
     toc: yes
     toc_float: no
     keep_md: yes
+  github_document: 
+    toc: yes
+  pdf_document:
+    toc: yes
 ---
 ##  `mtcars` as tibble
 

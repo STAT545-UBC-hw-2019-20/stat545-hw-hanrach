@@ -10,6 +10,8 @@ output:
     toc: yes
     toc_float: no
     keep_md: yes
+  github_document: 
+    toc: yes
   pdf_document:
     toc: yes
 ---
