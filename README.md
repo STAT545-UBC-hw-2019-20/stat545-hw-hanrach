@@ -3,7 +3,9 @@
 This repository contains the homework assignments for __STAT545A__ -- a data exploration course in R. The course webpage can be found [here](https://stat545.stat.ubc.ca/).
 
 ## Navigating through the repository
-There *isn't much* to navigate through now. Each assignment will be tagged with the corresponding number. 
+File links to each homework:
+[HW1](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-hanrach/tree/master/hw1)
+Each assignment will be tagged with the corresponding number. 
 
 ### About Me
 I'm a graduate student at UBC Mathematics, Vancouver. 
