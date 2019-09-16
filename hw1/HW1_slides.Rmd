@@ -1,0 +1,61 @@
+---
+title: '`mtcars` data exploration'
+author: "Rachel Han"
+date: "15/09/2019"
+output:
+  ioslides_presentation:
+    widescreen: yes
+  beamer_presentation: default
+  keep_md: true
+---
+## `mtcars` as tibble
+
+
+```{r, echo=FALSE, warning=FALSE,include=FALSE}
+library(tidyverse)
+library(gapminder)
+library(tibble)
+```
+
+`mtcars` data set is of type data.frame, not a tibble. A tibble lets us see the data without printing the entire data set to the console. An example is shown below:
+
+```{r}
+mtcars_tibble <-as_tibble(mtcars)
+head(mtcars_tibble)
+```
+
+## Dimensions of data
+Let's see how many rows and columns are there:
+```{r}
+rownum <- nrow(mtcars_tibble)
+colnum <- ncol(mtcars_tibble)
+cat("row:",rownum)
+cat("column:",colnum)
+```
+
+## Glimpse {.smaller}
+We can use the `glimpse` function to see the glimpse of the data. Notice that the data is transposed upon applying this function: the column names are now in rows. 
+```{r}
+glimpse(mtcars_tibble)
+```
+
+## Row names
+Notice that by changing the data type to tibble, the row names of `mtcars` are not the strings of car names, but numbers representing the row.
+
+Originally, the row names are:
+```{r}
+rownames(mtcars)
+```
+---
+After conversion:
+```{r}
+rownames(mtcars_tibble)
+```
+
+
+## Summary {.smaller}
+We can use the function `summary` to get some basic statistical information about the data. Here, we just select the first five columns.
+```{r}
+summary(mtcars_tibble[,1:5])
+```
+
