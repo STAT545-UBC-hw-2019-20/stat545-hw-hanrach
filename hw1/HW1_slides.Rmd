@@ -3,10 +3,10 @@ title: '`mtcars` data exploration'
 author: "Rachel Han"
 date: "15/09/2019"
 output:
-  ioslides_presentation:
-    widescreen: yes
   beamer_presentation: default
-  keep_md: true
+  ioslides_presentation: null
+  keep_md: yes
+  widescreen: yes
 ---
 ## `mtcars` as tibble
 
@@ -17,12 +17,19 @@ library(gapminder)
 library(tibble)
 ```
 
+
 `mtcars` data set is of type data.frame, not a tibble. A tibble lets us see the data without printing the entire data set to the console. An example is shown below:
 
 ```{r}
 mtcars_tibble <-as_tibble(mtcars)
-head(mtcars_tibble)
+head(mtcars_tibble[,1:5])
 ```
+---
+```{r, echo=FALSE, warning=FALSE,include=FALSE}
+mtcars_tibble_subset <-as_tibble(mtcars[1:10,1:5])
+```
+
+For the purpose of the presentation, we will use a smaller subset of the data.
 
 ## Dimensions of data
 Let's see how many rows and columns are there:
@@ -36,7 +43,7 @@ cat("column:",colnum)
 ## Glimpse {.smaller}
 We can use the `glimpse` function to see the glimpse of the data. Notice that the data is transposed upon applying this function: the column names are now in rows. 
 ```{r}
-glimpse(mtcars_tibble)
+glimpse(mtcars_tibble[1:4,1:4])
 ```
 
 ## Row names
@@ -44,18 +51,18 @@ Notice that by changing the data type to tibble, the row names of `mtcars` are n
 
 Originally, the row names are:
 ```{r}
-rownames(mtcars)
+rownames(mtcars[1:3,])
 ```
 ---
 After conversion:
 ```{r}
-rownames(mtcars_tibble)
+rownames(mtcars_tibble[1:3,])
 ```
 
 
 ## Summary {.smaller}
 We can use the function `summary` to get some basic statistical information about the data. Here, we just select the first five columns.
 ```{r}
-summary(mtcars_tibble[,1:5])
+summary(mtcars_tibble[,1:3])
 ```
 

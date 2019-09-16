@@ -3107,7 +3107,7 @@ slide:not(.current) .plotly.html-widget{
 
 <body style="opacity: 0">
 
-<slides class="layout-widescreen">
+<slides>
 
   <slide class="title-slide segue nobackground">
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
@@ -3136,6 +3136,10 @@ head(mtcars_tibble)</pre>
 ## 5  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2
 ## 6  18.1     6   225   105  2.76  3.46  20.2     1     0     3     1</pre>
 
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+
+<p>For the purpose of the presentation, we will use a smaller subset of the data.</p>
+
 </article></slide><slide class=""><hgroup><h2>Dimensions of data</h2></hgroup><article  id="dimensions-of-data">
 
 <p>Let’s see how many rows and columns are there:</p>
@@ -3150,25 +3154,19 @@ cat(&quot;row:&quot;,rownum)</pre>
 
 <pre >## column: 11</pre>
 
-</article></slide><slide class=""><hgroup><h2>Glimpse</h2></hgroup><article  class="smaller" id="glimpse">
+</article></slide><slide class=""><hgroup><h2>Glimpse</h2></hgroup><article  id="glimpse" class="smaller">
 
 <p>We can use the <code>glimpse</code> function to see the glimpse of the data. Notice that the data is transposed upon applying this function: the column names are now in rows.</p>
 
-<pre class = 'prettyprint lang-r'>glimpse(mtcars_tibble)</pre>
+<pre class = 'prettyprint lang-r'>glimpse(mtcars_tibble_subset)</pre>
 
-<pre >## Observations: 32
-## Variables: 11
-## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2,…
-## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4,…
+<pre >## Observations: 10
+## Variables: 5
+## $ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2
+## $ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6
 ## $ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140…
-## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 18…
-## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92,…
-## $ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.1…
-## $ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.…
-## $ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1,…
-## $ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,…
-## $ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4,…
-## $ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1,…</pre>
+## $ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123
+## $ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92</pre>
 
 </article></slide><slide class=""><hgroup><h2>Row names</h2></hgroup><article  id="row-names">
 
@@ -3176,31 +3174,22 @@ cat(&quot;row:&quot;,rownum)</pre>
 
 <p>Originally, the row names are:</p>
 
-<pre class = 'prettyprint lang-r'>rownames(mtcars)</pre>
+<pre class = 'prettyprint lang-r'>rownames(mtcars[1:10,])</pre>
 
-<pre >##  [1] &quot;Mazda RX4&quot;           &quot;Mazda RX4 Wag&quot;       &quot;Datsun 710&quot;         
-##  [4] &quot;Hornet 4 Drive&quot;      &quot;Hornet Sportabout&quot;   &quot;Valiant&quot;            
-##  [7] &quot;Duster 360&quot;          &quot;Merc 240D&quot;           &quot;Merc 230&quot;           
-## [10] &quot;Merc 280&quot;            &quot;Merc 280C&quot;           &quot;Merc 450SE&quot;         
-## [13] &quot;Merc 450SL&quot;          &quot;Merc 450SLC&quot;         &quot;Cadillac Fleetwood&quot; 
-## [16] &quot;Lincoln Continental&quot; &quot;Chrysler Imperial&quot;   &quot;Fiat 128&quot;           
-## [19] &quot;Honda Civic&quot;         &quot;Toyota Corolla&quot;      &quot;Toyota Corona&quot;      
-## [22] &quot;Dodge Challenger&quot;    &quot;AMC Javelin&quot;         &quot;Camaro Z28&quot;         
-## [25] &quot;Pontiac Firebird&quot;    &quot;Fiat X1-9&quot;           &quot;Porsche 914-2&quot;      
-## [28] &quot;Lotus Europa&quot;        &quot;Ford Pantera L&quot;      &quot;Ferrari Dino&quot;       
-## [31] &quot;Maserati Bora&quot;       &quot;Volvo 142E&quot;</pre>
+<pre >##  [1] &quot;Mazda RX4&quot;         &quot;Mazda RX4 Wag&quot;     &quot;Datsun 710&quot;       
+##  [4] &quot;Hornet 4 Drive&quot;    &quot;Hornet Sportabout&quot; &quot;Valiant&quot;          
+##  [7] &quot;Duster 360&quot;        &quot;Merc 240D&quot;         &quot;Merc 230&quot;         
+## [10] &quot;Merc 280&quot;</pre>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
 
 <p>After conversion:</p>
 
-<pre class = 'prettyprint lang-r'>rownames(mtcars_tibble)</pre>
+<pre class = 'prettyprint lang-r'>rownames(mtcars_tibble[1:10,])</pre>
 
-<pre >##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot; &quot;14&quot;
-## [15] &quot;15&quot; &quot;16&quot; &quot;17&quot; &quot;18&quot; &quot;19&quot; &quot;20&quot; &quot;21&quot; &quot;22&quot; &quot;23&quot; &quot;24&quot; &quot;25&quot; &quot;26&quot; &quot;27&quot; &quot;28&quot;
-## [29] &quot;29&quot; &quot;30&quot; &quot;31&quot; &quot;32&quot;</pre>
+<pre >##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  class="smaller" id="summary">
+</article></slide><slide class=""><hgroup><h2>Summary</h2></hgroup><article  id="summary" class="smaller">
 
 <p>We can use the function <code>summary</code> to get some basic statistical information about the data. Here, we just select the first five columns.</p>
 
