@@ -105,7 +105,7 @@ Kuwait is the country that recorded the maximum gdpPercap.
 Let's get a statistical summary of life expectancy, populartion and gdp per capita for Europe:
 
 ```{r}
-gapminder %>%filter(continent=="Europe") %>% select(lifeExp,pop,gdpPercap) %>% summary() %>% kable()
+gapminder %>%filter(continent=="Europe") %>% select(lifeExp,pop,gdpPercap) %>% summary()
 ```
 
 The distribution of gdpPercap across all the countries in Europe:

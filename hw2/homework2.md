@@ -141,17 +141,16 @@ per capita for
 Europe:
 
 ``` r
-gapminder %>%filter(continent=="Europe") %>% select(lifeExp,pop,gdpPercap) %>% summary() %>% kable()
+gapminder %>%filter(continent=="Europe") %>% select(lifeExp,pop,gdpPercap) %>% summary()
 ```
 
-|  |    lifeExp    |       pop        |    gdpPercap    |
-|  | :-----------: | :--------------: | :-------------: |
-|  |  Min. :43.59  |  Min. : 147962   |  Min. : 973.5   |
-|  | 1st Qu.:69.57 | 1st Qu.: 4331500 | 1st Qu.: 7213.1 |
-|  | Median :72.24 | Median : 8551125 | Median :12081.8 |
-|  |  Mean :71.90  |  Mean :17169765  |  Mean :14469.5  |
-|  | 3rd Qu.:75.45 | 3rd Qu.:21802867 | 3rd Qu.:20461.4 |
-|  |  Max. :81.76  |  Max. :82400996  |  Max. :49357.2  |
+    ##     lifeExp           pop             gdpPercap      
+    ##  Min.   :43.59   Min.   :  147962   Min.   :  973.5  
+    ##  1st Qu.:69.57   1st Qu.: 4331500   1st Qu.: 7213.1  
+    ##  Median :72.24   Median : 8551125   Median :12081.8  
+    ##  Mean   :71.90   Mean   :17169765   Mean   :14469.5  
+    ##  3rd Qu.:75.45   3rd Qu.:21802867   3rd Qu.:20461.4  
+    ##  Max.   :81.76   Max.   :82400996   Max.   :49357.2
 
 The distribution of gdpPercap across all the countries in
 Europe:
