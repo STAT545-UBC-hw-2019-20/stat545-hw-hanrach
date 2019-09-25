@@ -11,10 +11,9 @@ File links to each homework:
   - [HW2: HTML](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-hanrach/blob/master/hw2/homework2.html)
   
   
-=======
 
 
-### About Me
+## About Me
 I'm a graduate student at UBC Mathematics, Vancouver. 
 
 - I work on modelling [Lithim ion batteries](https://en.wikipedia.org/wiki/Lithium-ion_battery) :battery:
