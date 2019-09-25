@@ -22,6 +22,7 @@ output:
 library(tidyverse)
 library(gapminder)
 library(tibble)
+library(rmarkdown)
 ```
 
 `mtcars` data set is of type data.frame, not a tibble. A tibble lets us see the data without printing the entire data set to the console. An example is shown below:
