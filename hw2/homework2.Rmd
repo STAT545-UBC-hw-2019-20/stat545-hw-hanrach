@@ -2,12 +2,7 @@
 title: "Exploring Gapminder and using `dplyr`"
 author: "Rachel Han"
 date: "20/09/2019"
-always_allow_html: yes
 output:
-  pdf_document:
-    toc: yes
-  github_document:
-    toc: yes
   html_document:
     highlight: tango
     number_sections: yes
@@ -15,6 +10,10 @@ output:
     toc: yes
     toc_float: yes
     keep_md: yes
+  github_document:
+    toc: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -38,7 +37,7 @@ library(tsibble)
 ```{r}
 three_countries <- filter(gapminder, country %in% c("Hong Kong, China","Canada","Korea, Rep."))
 
-three_countries %>% datatable()
+three_countries 
 ```
 
 ## Pipe
@@ -53,14 +52,14 @@ All countries that have experienced a drop in life expectancy.
 ```{r}
 gapminder_lifeExpChange <- gapminder %>%  group_by(country) %>% mutate(lifeExpChange = lifeExp - lag(lifeExp)) %>% drop_na()
 
-gapminder_lifeExpChange %>% filter( lifeExpChange < 0) %>%  select(country,continent,year,lifeExp,lifeExpChange) %>%  datatable()
+gapminder_lifeExpChange %>% filter( lifeExpChange < 0) %>%  select(country,continent,year,lifeExp,lifeExpChange) 
 ```
 
 
 
 ## Max GDP per capita
 ```{r}
-gapminder %>% group_by(country) %>% mutate(max_gdpPercap = max(gdpPercap)) %>% filter(gdpPercap == max_gdpPercap) %>% select(country,year,max_gdpPercap) %>% datatable()
+gapminder %>% group_by(country) %>% mutate(max_gdpPercap = max(gdpPercap)) %>% filter(gdpPercap == max_gdpPercap) %>% select(country,year,max_gdpPercap) 
 ```
 
 
@@ -105,7 +104,7 @@ Kuwait is the country that recorded the maximum gdpPercap.
 Let's get a statistical summary of life expectancy, populartion and gdp per capita for Europe:
 
 ```{r}
-gapminder %>%filter(continent=="Europe") %>% select(lifeExp,pop,gdpPercap) %>% summary() %>% kable()
+gapminder %>%filter(continent=="Europe") %>% select(lifeExp,pop,gdpPercap) %>% summary()
 ```
 
 The distribution of gdpPercap across all the countries in Europe:
