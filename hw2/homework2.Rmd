@@ -53,14 +53,14 @@ All countries that have experienced a drop in life expectancy.
 ```{r}
 gapminder_lifeExpChange <- gapminder %>%  group_by(country) %>% mutate(lifeExpChange = lifeExp - lag(lifeExp)) %>% drop_na()
 
-gapminder_lifeExpChange %>% filter( lifeExpChange < 0) %>%  select(country,continent,year,lifeExp,lifeExpChange) %>%  
+gapminder_lifeExpChange %>% filter( lifeExpChange < 0) %>%  select(country,continent,year,lifeExp,lifeExpChange) 
 ```
 
 
 
 ## Max GDP per capita
 ```{r}
-gapminder %>% group_by(country) %>% mutate(max_gdpPercap = max(gdpPercap)) %>% filter(gdpPercap == max_gdpPercap) %>% select(country,year,max_gdpPercap) %>%
+gapminder %>% group_by(country) %>% mutate(max_gdpPercap = max(gdpPercap)) %>% filter(gdpPercap == max_gdpPercap) %>% select(country,year,max_gdpPercap) 
 ```
 
 
