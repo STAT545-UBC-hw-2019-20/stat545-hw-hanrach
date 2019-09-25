@@ -1,0 +1,192 @@
+---
+title: "Exploring Gapminder and using `dplyr`"
+author: "Rachel Han"
+date: "20/09/2019"
+always_allow_html: yes
+output:
+  pdf_document:
+    toc: yes
+  github_document:
+    toc: yes
+  html_document:
+    highlight: tango
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_float: yes
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, warning=FALSE,include=FALSE}
+library(tidyverse)
+library(gapminder)
+library(ggplot2)
+library(knitr)
+library(DT)
+library(rmarkdown)
+library(ggridges)
+library(tsibble)
+```
+
+# Exercise 1: Basic `dplyr`
+
+## Filter
+```{r}
+three_countries <- filter(gapminder, country %in% c("Hong Kong, China","Canada","Korea, Rep."))
+
+three_countries %>% datatable()
+```
+
+## Pipe
+
+```{r}
+gdp_dat <- three_countries %>% select(country, gdpPercap)
+```
+
+## Countries with a drop in life expectancy
+
+All countries that have experienced a drop in life expectancy.
+```{r}
+gapminder_lifeExpChange <- gapminder %>%  group_by(country) %>% mutate(lifeExpChange = lifeExp - lag(lifeExp)) %>% drop_na()
+
+gapminder_lifeExpChange %>% filter( lifeExpChange < 0) %>%  select(country,continent,year,lifeExp,lifeExpChange) %>%  datatable()
+```
+
+
+
+## Max GDP per capita
+```{r}
+gapminder %>% group_by(country) %>% mutate(max_gdpPercap = max(gdpPercap)) %>% filter(gdpPercap == max_gdpPercap) %>% select(country,year,max_gdpPercap) %>% datatable()
+```
+
+
+## Canada's life expectancy vs. GDP per capita
+```{r}
+gapminder %>% filter(country=="Canada") %>% ggplot(aes(lifeExp,gdpPercap)) + geom_point(alpha = 0.5, color="red") + scale_y_log10("GDP per capita") + xlab("Life Expectancy") 
+```
+
+# Exercise 2: Explore inidividual variables with `dplyr`
+
+### Quantitative variable
+
+#### Possible values
+```{r}
+range <-gapminder %>% select(gdpPercap) %>% range()
+print(range)
+```
+```{r}
+mingdp <- range[1]
+maxgdp <- range[2]
+```
+
+This tells us that minimum value of gdpPercap is 241.1659 and the maximum is 113523.1329. Let's find the corresponding countries.
+```{r}
+gapminder %>% select(country, year,gdpPercap) %>% filter(gdpPercap == mingdp) %>% kable()
+```
+
+
+Congo is the country that recorded the minimum gdpPercap.
+
+
+```{r}
+gapminder %>% select(country, year,gdpPercap) %>% filter(gdpPercap == maxgdp) %>% kable()
+```
+
+
+Kuwait is the country that recorded the maximum gdpPercap.
+
+
+#### Typical values / Spread of data / Distribution
+
+Let's get a statistical summary of life expectancy, populartion and gdp per capita for Europe:
+
+```{r}
+gapminder %>%filter(continent=="Europe") %>% select(lifeExp,pop,gdpPercap) %>% summary() %>% kable()
+```
+
+The distribution of gdpPercap across all the countries in Europe:
+```{r}
+gapminder %>% filter(continent=="Europe") %>% ggplot(aes(country,gdpPercap, color = country)) + geom_point(alpha=0.3) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + theme(legend.position = "none")
+```
+
+The following plots the density estimates of gdp per capita for each continent (estimates the underlying distribution of the data).
+```{r,warning=FALSE}
+ggplot(gapminder, aes(gdpPercap, continent, color = continent)) +
+  ggridges::geom_density_ridges(bins = 50)
+```
+
+
+### Categorical variable
+
+```{r}
+library(datasets)
+```
+
+We will use a different data set to explore a categorical variable. Let's explore cut variable
+
+```{r}
+diamonds <- as_tibble(diamonds)
+```
+
+#### Possible values of the variable
+```{r}
+cut_unique <- diamonds %>% select(cut) %>% unique()
+cut_unique %>% kable()
+```
+
+#### Typical values / Spread of data / Distribution
+
+```{r}
+diamonds %>% count(cut) %>% kable()
+```
+
+
+We can plot this count data:
+```{r}
+diamonds %>%  ggplot(aes(cut,fill = cut)) + geom_bar() 
+```
+
+We see that a 'fair' cut diamond is very rare, and 'ideal' cut is the most common one.
+
+## More plots
+
+Exploring the country with biggest drop in 10 years and plot it over the years. 
+
+```{r}
+gapminder %>% group_by(country) %>% arrange(year) %>% mutate(dec_gdpPercap=difference(gdpPercap,2)) %>% drop_na() %>% ungroup() %>%  group_by(continent) %>% filter(dec_gdpPercap == min(dec_gdpPercap)) %>% select(country,continent,year,gdpPercap,dec_gdpPercap) %>% arrange(dec_gdpPercap) %>% kable()
+```
+
+Kuwait recorded the biggest drop of GDP in 10 years.
+Let's see what happened over the years in Kuwait.
+```{r}
+gapminder %>% filter(country=="Kuwait") %>% ggplot(aes(year, gdpPercap,fill=year)) + geom_col(stat="identity") + coord_flip()
+```
+There seemed to have been a huge boom around 1960's but in the 2000's it dratically decreased. Could there have been some other factors that came into play?
+
+```{r}
+gapminder %>% filter(country=="Kuwait") %>% ggplot(aes(x = year)) + geom_point(aes(y=scale(lifeExp)), color = "red") +  geom_point(aes(y=scale(pop))) + geom_point(aes(y=scale(gdpPercap)), color="blue") 
+```
+
+
+It seems as though gdp per capita has an inverse relationship with the population and life expectancy in Kuwait.
+
+
+```{r}
+gapminder %>% ggplot(aes(continent,gdpPercap, color = continent)) + geom_boxplot() 
+```
+
+We see that Asia has the most fluctuations in gdpPercap.
+
+# Reasoning
+```{r}
+filter(gapminder, country == c("Rwanda", "Afghanistan"))
+```
+This code runs fine but the result returned is off in the sense that it is missing half of its entries (the entries for every five years is missing). The correct way to do this is:
+```{r}
+gapminder %>% filter(country %in% c("Afghanistan","Rwanda"))
+```
+`%in` checks if an element is in the vector whereas `==` checks if it is exactly the same as the specified value. By using `%in` in checks if each entry is in the specified vector `c("Afghanistan","Rwanda")`. Using `==` actually checks if each entry is equal to `c("Afghanistan","Rwanda")` which is not what we want.
