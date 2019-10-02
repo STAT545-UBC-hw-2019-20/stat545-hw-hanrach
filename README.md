@@ -10,6 +10,9 @@ File links to each homework:
   - [HW2:PDF document](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-hanrach/tree/master/hw2/homework2.pdf)
   - [HW2: HTML](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-hanrach/blob/master/hw2/homework2.html)
   
+- [HW3 Directory](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-hanrach/tree/master/hw3)
+- [HW3: link](https://stat545-ubc-hw-2019-20.github.io/stat545-hw-hanrach/blob/master/hw3/homework3.html)
+  
   
 
 
