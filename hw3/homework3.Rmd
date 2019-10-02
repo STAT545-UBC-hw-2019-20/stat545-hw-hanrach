@@ -3,8 +3,6 @@ title: "Exploring `gapminder` Part 2"
 author: "Rachel Han"
 date: "30/09/2019"
 output:
-  github_document:
-    toc: yes
   html_document:
     highlight: tango
     number_sections: yes
@@ -12,6 +10,8 @@ output:
     toc: yes
     toc_float: yes
     keep_md: yes
+  github_document:
+    toc: yes
   pdf_document:
     toc: yes
 ---
