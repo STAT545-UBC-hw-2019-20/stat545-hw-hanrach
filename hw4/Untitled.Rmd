@@ -1,0 +1,137 @@
+---
+title: "Tidy data and joins"
+author: "Rachel Han"
+date: "07/10/2019"
+output:
+  html_document:
+    highlight: tango
+    number_sections: yes
+    theme: united
+    toc: yes
+    toc_float: yes
+    keep_md: yes
+  github_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+```{r, echo=FALSE, warning=FALSE,include=FALSE}
+library(tidyverse)
+library(gapminder)
+library(ggplot2)
+library(knitr)
+library(DT)
+library(rmarkdown)
+library(ggridges)
+library(tsibble)
+library(scales)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Univariate data reshaping - Option 1
+
+- Make a tibble with one row per year, and columns for life expectancy for two or more countries.
+
+
+```{r}
+(gapminder_wide <- gapminder %>% filter(country %in% c("Canada","Korea, Rep.")) %>%
+   pivot_wider(id_cols= year,
+              names_from = country,
+              values_from = lifeExp)) %>% datatable()
+```
+
+-Take advantage of this new data shape to scatterplot life expectancy for one country against that of another.
+
+```{r}
+gapminder_wide %>% ggplot(aes(Canada, `Korea, Rep.`)) + geom_point(aes(color=year)) +
+  ggtitle("Life expectancy comparison") +
+  xlab("life expectancy of Canada") +
+  ylab("life expectancy of S. Korea")
+```
+
+-Re-lengthen the data.
+
+```{r}
+gapminder_wide %>% pivot_longer(cols = -year,
+                                names_to ="country",
+                                values_to = "lifeExp") %>% datatable()
+```
+
+# Multivariate Data Reshaping 
+
+- Make a tibble with one row per year, and columns for life expectancy and GDP per capita (or two other numeric variables) for two or more countries.
+
+```{r}
+(gapminder_multi <- gapminder %>%
+   filter(country %in% c("Canada","Korea, Rep.")) %>% 
+   pivot_wider(id_cols = year,
+               names_from = country,
+               values_from = c(lifeExp, gdpPercap))) %>% datatable()
+```
+
+- Re-lengthen the data.
+
+```{r}
+gapminder_multi %>% pivot_longer(cols=-year,
+                                 names_to = c(".value","country"),
+                                 names_sep = "_") %>% datatable()
+```
+
+# Table Joins
+Loading data from web...
+```{r echo = T, include = FALSE}
+guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
+email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
+```
+
+Let's view the data:
+
+```{r}
+guest %>% datatable()
+```
+
+```{r}
+email %>% kable()
+```
+
+
+We notice that the multiple people have same emails (one family gave one email). We fix this:
+
+```{r}
+(email_fixed <- email %>% 
+   separate_rows(guest, sep = ", ")  %>% rename(name=guest)) %>% 
+   datatable() 
+```
+
+This looks better.
+
+
+## 3.1 
+- For each guest, add a column for email address.
+```{r}
+(guest_email_join <- left_join(guest,email_fixed,
+                              by="name")) %>% datatable()
+```
+
+```{r}
+guest %>% left_join(email_fixed,by="name") %>% datatable()
+```
+
+## 3.2
+
+- Who do we have emails for, yet are not on the guest list?
+```{r}
+email_fixed %>% anti_join(guest, by = "name") %>% kable()
+```
+
+## 3.3
+
+- Make a guestlist that includes everyone we have emails for.
+
+```{r}
+guest %>% full_join(email_fixed) %>% datatable()
+```
+
