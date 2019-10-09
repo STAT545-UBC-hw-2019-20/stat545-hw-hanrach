@@ -15,7 +15,7 @@ File links to each homework:
   - **Click [here](https://stat545-ubc-hw-2019-20.github.io/stat545-hw-hanrach/hw3/homework3.html) to directly access homework3 html.**
   
 - [HW4 Directory](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-hanrach/tree/master/hw4)
-  - **Click [here](https://stat545-ubc-hw-2019-20.github.io/stat545-hw-hanrach/hw4/homework4.html) to directly access homework4 html.**
+  - **Click [here](https://stat545-ubc-hw-2019-20.github.io/stat545-hw-hanrach/hw4/hw4.html) to directly access homework4 html.**
   
   
 
