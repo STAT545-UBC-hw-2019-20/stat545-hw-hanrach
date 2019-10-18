@@ -145,7 +145,7 @@ p1<-gap_euro %>% ggplot(aes(x=(country),
   xlab("population") +
   theme_bw() +
   theme(legend.position = "none") +
-  ggtitle()
+  ggtitle("Population by country")
 
 p2<- gap_euro %>% ggplot(aes(y=pop,
              x =fct_reorder(gap_euro$country,
@@ -156,7 +156,8 @@ p2<- gap_euro %>% ggplot(aes(y=pop,
   ylab("countries") + 
   xlab("population") + 
   theme_bw() +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  ggtitle("Population by country")
 
 # plot side by side
 grid.arrange(p1,p2,ncol=2)
