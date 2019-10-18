@@ -67,24 +67,36 @@ Before dropping `Oceania` continent, we first check if `contient` is a factor.
 # levels?
 (gapminder$continent %>% 
    levels()) 
+
+# number of rows in the data
+(gapminder_rownum<-nrow(gapminder))
 ```
 
 We now drop `Oceania` and unnecessary factor levels.
 
 ```{r}
+# Filter oceania
 filter_gap <- gapminder %>%
   filter(continent != "Oceania")
 
+# Drop unused factors (continents)
 gap <- filter_gap %>%
   droplevels() 
+
 ```
 
-Now after dropping `Oceania` we check that the of levels is decreased, and check the levels.
+Now after dropping `Oceania` we check that the of levels is decreased to 4, and check the levels. Of course, the total number of rows decreased as well
 ```{r}
-gap$continent %>%
-  nlevels
-gap$continent %>% 
-  levels
+# how many levels?
+(gap$continent %>%
+  nlevels)
+
+# levels?
+(gap$continent %>% 
+  levels)
+
+#number of rows in the data
+((gap_rownum <-nrow(gap)))
 ```
 
 ## Reorder levels based on knowledge from data.
@@ -132,7 +144,8 @@ p1<-gap_euro %>% ggplot(aes(x=(country),
   ylab("countries") + 
   xlab("population") +
   theme_bw() +
-  theme(legend.position = "none")
+  theme(legend.position = "none") +
+  ggtitle()
 
 p2<- gap_euro %>% ggplot(aes(y=pop,
              x =fct_reorder(gap_euro$country,
